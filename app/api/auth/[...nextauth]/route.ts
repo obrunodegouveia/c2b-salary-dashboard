@@ -14,13 +14,9 @@ const handler = NextAuth({
   },
   callbacks: {
     async signIn({ user }) {
-      // Only allow @caretobeauty.com emails
       return user.email?.endsWith("@caretobeauty.com") ?? false;
     },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.sub!;
-      }
+    async session({ session }) {
       return session;
     },
   },
